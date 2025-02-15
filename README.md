@@ -5,7 +5,7 @@ Este projeto tem como objetivo a criação de um sistema bancário simples utili
 
 O sistema foi desenvolvido para simular a funcionalidade básica de um banco, com foco em controle de saldo, limitação de saques diários e armazenamento de transações no extrato. Além disso, o projeto possibilita que o usuário interaja com o banco através de um menu interativo, utilizando entradas de texto.
 
-#Regras do programa:
+Regras do programa:
    1 - O usuário só pode realizar 3 saques por dia.
    2 - O valor máximo de cada saque é apenas 500$.
    3 - Os usuários tem um "Cheque-especial" de 500$
