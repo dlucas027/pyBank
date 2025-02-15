@@ -27,20 +27,18 @@ Se você tiver dicas, sugestões ou feedback, sinta se a vontade para me chamar 
 
 ## 📸 Em funcionamento
 
-1. **Menu Interativo**
-![Menu](https://github.com/user-attachments/assets/0d01c350-af46-4168-9981-33121d0a2156)
+1. **Menu Interativo**  
+   ![Menu](https://github.com/user-attachments/assets/0d01c350-af46-4168-9981-33121d0a2156)
 
+3. **Área de Depósito**  
+   ![Depósito](https://github.com/user-attachments/assets/ebc21665-1177-4a74-8493-d196d7387fcd)
 
-3. **Área de Depósito**
-![Depósito"](https://github.com/user-attachments/assets/ebc21665-1177-4a74-8493-d196d7387fcd)
+5. **Área de Saque**  
+   ![Saque](https://github.com/user-attachments/assets/e726cffb-ae97-421c-a601-5a6aae01dd8c)
 
+7. **Extrato**  
+   ![Extrato](https://github.com/user-attachments/assets/0521ebea-f29a-41e0-b6b2-37dd110f4f7d)
 
-5. **Área de Saque**
-![Saque](https://github.com/user-attachments/assets/e726cffb-ae97-421c-a601-5a6aae01dd8c)
-
-
-7. **Extrato**
-![Extrato](https://github.com/user-attachments/assets/0521ebea-f29a-41e0-b6b2-37dd110f4f7d)
 
 
 
