@@ -1,5 +1,10 @@
 usuarios = []  # Lista para armazenar os usuários
 numero_conta = 1  # Contador de contas (a conta vai subindo conforme os usuários são criados)
+LIMITE_SAQUES = 3
+saldo = 0
+limite = 500
+extrato = ""
+numero_saques = 0
 
 def exibir_menu():  # Menu
     print("="*40)
@@ -14,7 +19,7 @@ def exibir_menu():  # Menu
     opcao = input("Para prosseguir, escolha uma opção válida: ")
     return opcao
 
-#Área de validação
+
 def validar_cpf(cpf): #Validação no CPF
     return len(cpf) == 11 and cpf.isdigit()
 
@@ -30,55 +35,39 @@ def validar_data(data): #Validação no formato data
 def validar_nome(nome):  #Validação no formato de nome
     return not any(char.isdigit() for char in nome)
 
-saldo = 0
-limite = 500
-extrato = ""
-numero_saques = 0
-LIMITE_SAQUES = 3
-
-while True:   #Loop Principal
-
+while True:  # Loop Principal
     opcao = exibir_menu()
 
-    if opcao == "1":  #Área de Depósito
+    if opcao == "1":  # Área de Depósito
         valor = float(input("Informe o valor do depósito: "))
-
         if valor > 0:
             saldo += valor
             extrato += f"Depósito: R$ {valor:.2f}\n"
             print("Depósito efetuado com sucesso!")
-
         else:
             print("Operação falhou! O valor informado é inválido.")
 
-    elif opcao == "2":  #Área de Saque
+    elif opcao == "2":  # Área de Saque
         valor = float(input("Informe o valor do saque: "))
-
         excedeu_saldo = valor > saldo
-
         excedeu_limite = valor > limite
-
         excedeu_saques = numero_saques >= LIMITE_SAQUES
 
         if excedeu_saldo:
             print("Operação falhou! Você não tem saldo suficiente.")
-
         elif excedeu_limite:
             print("Operação falhou! O valor do saque excede o limite.")
-
         elif excedeu_saques:
             print("Operação falhou! Número máximo de saques excedido.")
-
         elif valor > 0:
             saldo -= valor
             extrato += f"Saque: R$ {valor:.2f}\n"
             numero_saques += 1
             print("Saque efetuado com sucesso!")
-
         else:
             print("Operação falhou! O valor informado é inválido.")
 
-    elif opcao == "3":  #Área de Extrato
+    elif opcao == "3":  # Área de Extrato
         print("\n================ EXTRATO ================")
         print("Não foram realizadas movimentações." if not extrato else extrato)
         print(f"\nSaldo: R$ {saldo:.2f}")
