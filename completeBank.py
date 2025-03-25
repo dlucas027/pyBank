@@ -128,7 +128,7 @@ class Historico: #Nova classe Historico
             {
                 "tipo": transacao.__class__.__name__,  # O tipo da transação é o nome da classe da transação (ex: 'Saque', 'Deposito', etc.)
                 "valor": transacao.valor,  # O valor da transação, acessando o atributo 'valor' do objeto transacao (o valor do saque ou depósito)
-                "data": datetime.now().strftime("%d-%m-%Y %H:%M:%s"),  # A data e hora da transação, formatada como dia-mês-ano hora:minuto:segundo
+                "data": datetime.now().strftime("%d-%m-%Y %H:%M:%S"),  # A data e hora da transação, formatada como dia-mês-ano hora:minuto:segundo
             }
         )
 
@@ -185,20 +185,22 @@ class Deposito(Transacao):
             conta.historico.adicionar_transacao(self)  # Adiciona a transação ao histórico da conta
 
 
-def menu():  #Define a função Menu para exibir as opções do sistema
+def menu():  # Define a função Menu para exibir as opções do sistema
     menu = """\n
     ╔════════════════════════════════════════════╗
-    ║              SISTEMA BANCÁRIO              ║
+    ║          pyBANK - BANKING SYSTEM           ║
     ║════════════════════════════════════════════║
-    ║  [1]  - Depositar                          ║
-    ║  [2]  - Sacar                              ║
-    ║  [3]  - Extrato                            ║
-    ║  [4]  - Nova conta                         ║
-    ║  [5]  - Listar contas                      ║
-    ║  [6]  - Novo usuário                       ║
-    ║  [0]  - Sair                               ║
+    ║  [1]  - ✅ Deposit                         ║
+    ║  [2]  - 💰 Withdraw                        ║
+    ║  [3]  - 🔄 Statement                       ║
+    ║  [5]  - 🏦 Create account                  ║
+    ║  [6]  - 💡 List Accounts                   ║
+    ║  [0]  - ⛔ Exit                            ║
     ╚════════════════════════════════════════════╝
-    Escolha uma opção: """
+
+    ⚠️  Attention: Create a new account [5] and [4] a user registration before using other options!
+
+    Choose a valid option:"""
     
     return input(textwrap.dedent(menu))  # A função textwrap.dedent é usada para remover a indentação extra do texto
 
@@ -210,7 +212,7 @@ def filtrar_cliente(cpf, clientes):  # Filtra os clientes pelo CPF, ou seja, com
 
 def recuperar_conta_cliente(cliente): # Verifica se o cliente não possui contas associadas
     if not cliente.contas: #Verificação de contas associadas
-        print("\nCliente não possui conta!")
+        print("\nClient does not have an account!")
         return
 
     # FIXME: upgrade para conta PJ e PF no sistema
@@ -218,14 +220,14 @@ def recuperar_conta_cliente(cliente): # Verifica se o cliente não possui contas
 
 
 def depositar(clientes): #Função para deposito
-    cpf = input("Informe o CPF do cliente: ") # Solicita o CPF do cliente
+    cpf = input("Please enter the client's SSN: ") # Solicita o CPF do cliente
     cliente = filtrar_cliente(cpf, clientes) # Realiza o filtro na classe Conta para encontrar o cliente
 
     if not cliente: #Se o cliente não for encontrado
-        print("\nCliente não encontrado!")
+        print("\nClient not found!")
         return
 
-    valor = float(input("Informe o valor do depósito: "))  # Solicita o valor do depósito
+    valor = float(input("Please enter the deposit amount: "))  # Solicita o valor do depósito
     transacao = Deposito(valor)
 
     conta = recuperar_conta_cliente(cliente) # Recupera a conta do cliente
@@ -236,14 +238,14 @@ def depositar(clientes): #Função para deposito
 
 
 def sacar(clientes): #Função sacar
-    cpf = input("Informe o CPF do cliente: ")
+    cpf = input("Please enter the client's SSN: ")
     cliente = filtrar_cliente(cpf, clientes) # Filtra a lista de clientes buscando pelo CPF
 
     if not cliente:
-        print("\nCliente não encontrado!")
+        print("\nClient not found!")
         return  # Sem o 'return', o código continuaria, mesmo sem o cliente encontrado
 
-    valor = float(input("Informe o valor do saque: ")) # Solicita o valor que o cliente deseja sacar
+    valor = float(input("Please enter the withdrawal amount: ")) # Solicita o valor que o cliente deseja sacar
     transacao = Saque(valor)  # Cria um objeto do tipo Saque, representando a transação
 
     conta = recuperar_conta_cliente(cliente) # Recupera a conta associada ao cliente
@@ -254,23 +256,23 @@ def sacar(clientes): #Função sacar
 
 
 def exibir_extrato(clientes): # Recebe o parãmetro Clientes
-    cpf = input("Informe o CPF do cliente: ")
+    cpf = input("Please enter the client's SSN: ")
     cliente = filtrar_cliente(cpf, clientes) # Filtra a lista de clientes com o CPF fornecido
 
     if not cliente:
-        print("\n Cliente não encontrado!")
+        print("\n Client not found!")
         return
 
     conta = recuperar_conta_cliente(cliente)
     if not conta:
         return
 
-    print("\n================ EXTRATO ================") # Exibe o cabeçalho do extrato
+    print("\n================ STATEMENT ================") # Exibe o cabeçalho do extrato
     transacoes = conta.historico.transacoes
 
     extrato = ""  # Inicializa a variável extrato
     if not transacoes:  # Se não houver transações
-        extrato = "Não foram realizadas movimentações." # Exibe a mensagem informando a falta de movimentações
+        extrato = "No transactions were made." # Exibe a mensagem informando a falta de movimentações
     else:
         for transacao in transacoes: # Para cada transação no histórico
             extrato += f"\n{transacao['tipo']}:\n\tR$ {transacao['valor']:.2f}" # Adiciona detalhes da transação
@@ -282,31 +284,31 @@ def exibir_extrato(clientes): # Recebe o parãmetro Clientes
 
 
 def criar_cliente(clientes): # Solicita o CPF do cliente
-    cpf = input("Informe o CPF (somente número): ")
+    cpf = input("Please enter the SSN (numbers only): ")
     cliente = filtrar_cliente(cpf, clientes) # Verifica se já existe um cliente com o CPF informado
 
     if cliente:  # Se já houver um cliente, exibe mensagem e retorna
-        print("\nJá existe cliente com esse CPF!")
+        print("\nClient with this SSN already exists!")
         return
 
-    nome = input("Informe o nome completo: ")  # Solicita outros dados do cliente, caso o CPF não exista
-    data_nascimento = input("Informe a data de nascimento (dd-mm-aaaa): ")
-    endereco = input("Informe o endereço (logradouro, nro - bairro - cidade/sigla estado): ")
+    nome = input("Please enter the full name: ")  # Solicita outros dados do cliente, caso o CPF não exista
+    data_nascimento = input("Please enter the date of birth (dd-mm-yyyy): ")
+    endereco = input(" Please enter the address (street, number - neighborhood - city/state abbreviation): ")
 
     # Cria um novo objeto PessoaFisica com os dados fornecidos
     cliente = PessoaFisica(nome=nome, data_nascimento=data_nascimento, cpf=cpf, endereco=endereco) 
 
     clientes.append(cliente) # Adiciona o novo cliente à lista de clientes
 
-    print("\n=== Cliente criado com sucesso! ===")
+    print("\n=== Client created successfully! ===")
 
 
 def criar_conta(numero_conta, clientes, contas): # Solicita o CPF do cliente para o qual a conta será criada
-    cpf = input("Informe o CPF do cliente: ")
+    cpf = input("Please enter the client's SSN: ")
     cliente = filtrar_cliente(cpf, clientes)    # Busca o cliente na lista de clientes com base no CPF
 
     if not cliente:
-        print("\nCliente não encontrado, fluxo de criação de conta encerrado!")  # Se o cliente não for encontrado, exibe mensagem de erro e encerra a função
+        print("\nClient not found, account creation process terminated!")  # Se o cliente não for encontrado, exibe mensagem de erro e encerra a função
         return
 
     conta = ContaCorrente.nova_conta(cliente=cliente, numero=numero_conta)  # Cria uma nova conta corrente associada ao cliente e ao número de conta fornecido
@@ -314,7 +316,7 @@ def criar_conta(numero_conta, clientes, contas): # Solicita o CPF do cliente par
     contas.append(conta)
     cliente.contas.append(conta)
 
-    print("\n=== Conta criada com sucesso! ===")
+    print("\n=== Account successfully created! ===")
 
 
 def listar_contas(contas):
@@ -360,7 +362,7 @@ def main():
 
         else:
             # Caso o usuário insira uma opção inválida
-            print("\nOperação inválida, por favor selecione novamente a operação desejada.")
+            print("\nInvalid operation, please select the desired operation again")
 
 # Chama a função principal
 main()
