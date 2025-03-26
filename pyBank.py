@@ -1,7 +1,6 @@
 import textwrap  # Formatação de blocos de texto, quebra de linhas automática
 from abc import ABC, abstractmethod  # Para criar classes e métodos abstratos
 from datetime import datetime  # Para lidar com data e hora
-
 class Cliente:          #Criação da classe cliente
     def __init__(self, endereco):   
         self.endereco = endereco     #Armazena o endereço
@@ -11,16 +10,12 @@ class Cliente:          #Criação da classe cliente
 
     def adicionar_conta(self, conta):
         self.contas.append(conta) # Adiciona uma nova conta à lista de contas do cliente
-
-
 class PessoaFisica(Cliente):   #classe Pessoa Física filha **HERDA** da classe Cliente (Tem tudo que a classe cliente tem e ainda pode add+ coisas)
     def __init__(self, nome, data_nascimento, cpf, endereco): #Método construtor com os parâmetros do cliente
         super().__init__(endereco)   #super(). chama a classe pai sem precisar reescrever e já define o endereço
         self.nome = nome
         self.data_nascimento = data_nascimento  #atributos do objeto criado a partir da classe cliente
         self.cpf = cpf
-
-
 class Conta:    #Nova classe CONTA BANCÁRIA
     def __init__(self, numero, cliente): #Construtor da classe, inicializa o "objeto" conta
         self._saldo = 0
@@ -57,28 +52,27 @@ class Conta:    #Nova classe CONTA BANCÁRIA
         saldo = self.saldo    # Acessa o saldo da conta através da propriedade saldo
         excedeu_saldo = valor > saldo  # Verifica se o valor de saque é maior que o saldo disponível
         if excedeu_saldo: # Caso o valor do saque seja maior que o saldo
-            print("\n Operação falhou! Você não tem saldo suficiente.") # Mensagem de erro
+            print("\nOperation failed! You don't have enough balance.") # Mensagem de erro
 
         elif valor > 0:  #se for menor ou = 0 exibe erro
             self._saldo -= valor     #se valor for positivo, reduz do saldo do cliente
-            print("\n=== Saque realizado com sucesso! ===")
+            print("\n=== Withdrawal successful! ===")
             return True   #True se for bem sucedida
 
         else:
-            print("\n Operação falhou! O valor informado é inválido.")
+            print("\nOperation failed! The entered amount is invalid")
 
         return False  #False se falhar 
 
     def depositar(self, valor):  #função para depositar, parâmetro valor dessa vez usado para adicionar 
         if valor > 0:
             self._saldo += valor #se maior que zero, adiciona ao saldo
-            print("\n=== Depósito realizado com sucesso! ===")
+            print("\n=== Deposit successfully made! ===")
         else:
-            print("\n Operação falhou! O valor informado é inválido.")
+            print("\nOperation failed! The entered amount is invalid.")
             return False
 
         return True
-
 
 class ContaCorrente(Conta):  # ContaCorrente é uma classe que herda da classe Conta
     def __init__(self, numero, cliente, limite=5000, limite_saques=10): # Construtor da ContaCorrente
@@ -90,16 +84,15 @@ class ContaCorrente(Conta):  # ContaCorrente é uma classe que herda da classe C
         numero_saques = len(   # Conta o número de saques realizados verificando as transações do histórico
             [transacao for transacao in self.historico.transacoes if transacao["tipo"] == Saque.__name__]   #for transacao in self.historico.transacoes percorre todas transações realizadas até agora
         )  # Percorre todas as transações no histórico, contando quantos saques (transações do tipo Saque) foram feitos
-    
 
         excedeu_limite = valor > self._limite   # Verifica se o valor do saque excede o limite da conta
         excedeu_saques = numero_saques >= self._limite_saques # Verifica se o número de saques já ultrapassou o limite permitido
 
         if excedeu_limite: #Resultados da comparação anterior
-            print("\n Operação falhou! O valor do saque excede o limite.")
+            print("\n Operation failed! The withdrawal amount exceeds the limit.")
 
         elif excedeu_saques:
-            print("\n Operação falhou! Número máximo de saques excedido.")
+            print("\n Operation failed! Maximum number of withdrawals exceeded.")
 
         else:
             return super().sacar(valor)  # Chama o método sacar da classe pai (Conta), que já realiza o saque 
@@ -112,8 +105,6 @@ class ContaCorrente(Conta):  # ContaCorrente é uma classe que herda da classe C
             C/C:\t\t{self.numero}
             Titular:\t{self.cliente.nome}
         """
-
-
 class Historico: #Nova classe Historico
     def __init__(self):   # Inicializa o objeto Historico, criando uma lista vazia para armazenar transações
         self._transacoes = []
@@ -131,8 +122,6 @@ class Historico: #Nova classe Historico
                 "data": datetime.now().strftime("%d-%m-%Y %H:%M:%S"),  # A data e hora da transação, formatada como dia-mês-ano hora:minuto:segundo
             }
         )
-
-
 class Transacao(ABC):# Define a propriedade valor como abstrata. 
     # Isso significa que qualquer classe filha precisa implementar essa propriedade.
     @property
@@ -145,8 +134,6 @@ class Transacao(ABC):# Define a propriedade valor como abstrata.
     @abstractmethod  # Usando @abstractmethod para registrar a transação
     def registrar(self, conta):
         pass
-
-
 class Saque(Transacao):
     # Construtor da classe Saque, que inicializa o valor do saque.
     def __init__(self, valor):
@@ -164,8 +151,6 @@ class Saque(Transacao):
 
         if sucesso_transacao:  # Se o saque for bem-sucedido
             conta.historico.adicionar_transacao(self)  # Adiciona a transação ao histórico da conta
-
-
 class Deposito(Transacao):
     # Construtor da classe Deposito, que inicializa o valor do depósito.
     def __init__(self, valor):
@@ -183,7 +168,6 @@ class Deposito(Transacao):
 
         if sucesso_transacao:  # Se o depósito for bem-sucedido
             conta.historico.adicionar_transacao(self)  # Adiciona a transação ao histórico da conta
-
 
 def menu():  # Define a função Menu para exibir as opções do sistema
     menu = """\n
@@ -204,11 +188,9 @@ def menu():  # Define a função Menu para exibir as opções do sistema
     
     return input(textwrap.dedent(menu))  # A função textwrap.dedent é usada para remover a indentação extra do texto
 
-
 def filtrar_cliente(cpf, clientes):  # Filtra os clientes pelo CPF, ou seja, compara o CPF passado com os clientes na lista
     clientes_filtrados = [cliente for cliente in clientes if cliente.cpf == cpf] #Lista clientes tem o atributo CPF, ele percorre essa lista comparando esse atributo
     return clientes_filtrados[0] if clientes_filtrados else None  #Se a lista não estiver vazia ele retorna o usuário com CPF correspondente
-
 
 def recuperar_conta_cliente(cliente): # Verifica se o cliente não possui contas associadas
     if not cliente.contas: #Verificação de contas associadas
@@ -217,7 +199,6 @@ def recuperar_conta_cliente(cliente): # Verifica se o cliente não possui contas
 
     # FIXME: upgrade para conta PJ e PF no sistema
     return cliente.contas[0]  # Retorna a primeira conta do cliente, caso o cliente tenha contas
-
 
 def depositar(clientes): #Função para deposito
     cpf = input("Please enter the client's SSN: ") # Solicita o CPF do cliente
@@ -236,7 +217,6 @@ def depositar(clientes): #Função para deposito
 
     cliente.realizar_transacao(conta, transacao)  # Realiza a transação do depósito na conta
 
-
 def sacar(clientes): #Função sacar
     cpf = input("Please enter the client's SSN: ")
     cliente = filtrar_cliente(cpf, clientes) # Filtra a lista de clientes buscando pelo CPF
@@ -253,7 +233,6 @@ def sacar(clientes): #Função sacar
         return # Interrompe a execução caso o cliente não tenha conta
 
     cliente.realizar_transacao(conta, transacao)  # Realiza a transação (o saque) na conta do cliente
-
 
 def exibir_extrato(clientes): # Recebe o parãmetro Clientes
     cpf = input("Please enter the client's SSN: ")
@@ -277,11 +256,9 @@ def exibir_extrato(clientes): # Recebe o parãmetro Clientes
         for transacao in transacoes: # Para cada transação no histórico
             extrato += f"\n{transacao['tipo']}:\n\tR$ {transacao['valor']:.2f}" # Adiciona detalhes da transação
 
-
     print(extrato)
     print(f"\nSaldo:\n\tR$ {conta.saldo:.2f}") # Exibe o saldo da conta
     print("==========================================")
-
 
 def criar_cliente(clientes): # Solicita o CPF do cliente
     cpf = input("Please enter the SSN (numbers only): ")
@@ -302,7 +279,6 @@ def criar_cliente(clientes): # Solicita o CPF do cliente
 
     print("\n=== Client created successfully! ===")
 
-
 def criar_conta(numero_conta, clientes, contas): # Solicita o CPF do cliente para o qual a conta será criada
     cpf = input("Please enter the client's SSN: ")
     cliente = filtrar_cliente(cpf, clientes)    # Busca o cliente na lista de clientes com base no CPF
@@ -318,12 +294,10 @@ def criar_conta(numero_conta, clientes, contas): # Solicita o CPF do cliente par
 
     print("\n=== Account successfully created! ===")
 
-
 def listar_contas(contas):
     for conta in contas:
         print("=" * 100)
         print(textwrap.dedent(str(conta)))
-
 
 def main():
     # Inicializando as listas de clientes e contas
@@ -363,6 +337,5 @@ def main():
         else:
             # Caso o usuário insira uma opção inválida
             print("\nInvalid operation, please select the desired operation again")
-
 # Chama a função principal
 main()
