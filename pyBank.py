@@ -89,10 +89,10 @@ class ContaCorrente(Conta):  # ContaCorrente é uma classe que herda da classe C
         excedeu_saques = numero_saques >= self._limite_saques # Verifica se o número de saques já ultrapassou o limite permitido
 
         if excedeu_limite: #Resultados da comparação anterior
-            print("\n Operation failed! The withdrawal amount exceeds the limit.")
+            print("\nOperation failed! The withdrawal amount exceeds the limit.")
 
         elif excedeu_saques:
-            print("\n Operation failed! Maximum number of withdrawals exceeded.")
+            print("\nOperation failed! Maximum number of withdrawals exceeded.")
 
         else:
             return super().sacar(valor)  # Chama o método sacar da classe pai (Conta), que já realiza o saque 
@@ -101,9 +101,9 @@ class ContaCorrente(Conta):  # ContaCorrente é uma classe que herda da classe C
 
     def __str__(self): #Método de instancia, pertencente a classe ContaCorrente, vai imprimir em string, agencia, numero e nome
         return f"""\
-            Agência:\t{self.agencia}
+            Bank Branch:\t{self.agencia}
             C/C:\t\t{self.numero}
-            Titular:\t{self.cliente.nome}
+            Account Holder:\t{self.cliente.nome}
         """
 class Historico: #Nova classe Historico
     def __init__(self):   # Inicializa o objeto Historico, criando uma lista vazia para armazenar transações
@@ -172,14 +172,15 @@ class Deposito(Transacao):
 def menu():  # Define a função Menu para exibir as opções do sistema
     menu = """\n
     ╔════════════════════════════════════════════╗
-    ║          pyBANK - BANKING SYSTEM           ║
+    ║           pyBank  -   BANKING SYSTEM       ║
     ║════════════════════════════════════════════║
-    ║  [1]  - ✅ Deposit                         ║
-    ║  [2]  - 💰 Withdraw                        ║
-    ║  [3]  - 🔄 Statement                       ║
+    ║  [1]  - 💰 Deposit                         ║
+    ║  [2]  - 💸 Withdraw                        ║
+    ║  [3]  - 📜 Statement                       ║
+    ║  [4]  - 📝 Create user registration        ║
     ║  [5]  - 🏦 Create account                  ║
-    ║  [6]  - 💡 List Accounts                   ║
-    ║  [0]  - ⛔ Exit                            ║
+    ║  [6]  - 📋 List Accounts                   ║
+    ║  [0]  - ❌ Exit                            ║
     ╚════════════════════════════════════════════╝
 
     ⚠️  Attention: Create a new account [5] and [4] a user registration before using other options!
@@ -270,7 +271,7 @@ def criar_cliente(clientes): # Solicita o CPF do cliente
 
     nome = input("Please enter the full name: ")  # Solicita outros dados do cliente, caso o CPF não exista
     data_nascimento = input("Please enter the date of birth (dd-mm-yyyy): ")
-    endereco = input(" Please enter the address (street, number - neighborhood - city/state abbreviation): ")
+    endereco = input("Please enter the address (street, number - neighborhood - city/state abbreviation): ")
 
     # Cria um novo objeto PessoaFisica com os dados fornecidos
     cliente = PessoaFisica(nome=nome, data_nascimento=data_nascimento, cpf=cpf, endereco=endereco) 
