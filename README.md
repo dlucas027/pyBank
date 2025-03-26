@@ -23,32 +23,38 @@ In the future, I plan to integrate a graphical user interface (GUI) and add a fe
 
 ## Project Features
 
+## Project Features
+
 1. **Menu**  
    ![image](https://github.com/user-attachments/assets/2999c0db-ba6c-4109-bccb-aca8be1aadb1)
+   
 
-2. **Criação de Usuário**  
+3. **User Creation**  
    ![image](https://github.com/user-attachments/assets/89377d7d-b454-45f9-aa3f-5a46af85241e)
+   
 
-3. **Criação de Conta**  
+4. **Account Creation**  
    ![image](https://github.com/user-attachments/assets/20ed5b0c-02eb-44a9-9944-0e23d7b523cc)
+   
 
-4. **Depósito**  
+5. **Deposit**  
    ![image](https://github.com/user-attachments/assets/0f307758-be6b-40c2-8e25-5aee18d68b62)
+   
 
-5. **Saque**  
+6. **Withdrawal**  
    ![image](https://github.com/user-attachments/assets/09ed03dc-9374-41e3-91ac-3f1e43181500)
+   
 
-6. **Listar Contas**  
+7. **List Accounts**  
    ![image](https://github.com/user-attachments/assets/836e6b01-f725-4e2e-8272-354ffd5f8afe)
+   
 
-7. **Extrato**  
+8. **Statement**  
    ![image](https://github.com/user-attachments/assets/633ad201-afd1-4c8b-a60a-3c753a365441)
 
 
-
-
-
-
+---
+---
 ---  
 
-💻**Matheus de Lucas Arouca**.  
+## Matheus de Lucas Arouca [LinkedIn](https://www.linkedin.com/in/delucas027)
