@@ -27,17 +27,31 @@ Se você tiver dicas, sugestões ou feedback, sinta se a vontade para me chamar 
 
 ## 📸 Em funcionamento
 
-1. **Menu Interativo**  
-   ![Menu](https://github.com/user-attachments/assets/0d01c350-af46-4168-9981-33121d0a2156)
+1. **Menu**  
+   ![image](https://github.com/user-attachments/assets/2999c0db-ba6c-4109-bccb-aca8be1aadb1)
 
-3. **Área de Depósito**  
-   ![Depósito](https://github.com/user-attachments/assets/ebc21665-1177-4a74-8493-d196d7387fcd)
 
-5. **Área de Saque**  
-   ![Saque](https://github.com/user-attachments/assets/e726cffb-ae97-421c-a601-5a6aae01dd8c)
+3. **criação de usuario**  
+   ![image](https://github.com/user-attachments/assets/89377d7d-b454-45f9-aa3f-5a46af85241e)
 
-7. **Extrato**  
-   ![Extrato](https://github.com/user-attachments/assets/0521ebea-f29a-41e0-b6b2-37dd110f4f7d)
+
+5. **criação de conta**  
+   ![image](https://github.com/user-attachments/assets/20ed5b0c-02eb-44a9-9944-0e23d7b523cc)
+
+
+7. **deposito**  
+   ![image](https://github.com/user-attachments/assets/0f307758-be6b-40c2-8e25-5aee18d68b62)
+
+saque
+  ![image](https://github.com/user-attachments/assets/09ed03dc-9374-41e3-91ac-3f1e43181500)
+
+listar contas]
+![image](https://github.com/user-attachments/assets/836e6b01-f725-4e2e-8272-354ffd5f8afe)
+
+
+extrato
+
+![image](https://github.com/user-attachments/assets/633ad201-afd1-4c8b-a60a-3c753a365441)
 
 
 
